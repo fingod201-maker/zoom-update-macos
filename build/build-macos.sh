@@ -5,7 +5,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 APP_NAME="ZoomUpdate"
-VERSION="1.0.0"
+VERSION="${VERSION:-1.0.0}"
+VERSION="${VERSION//[^0-9.]/}"
 BUNDLE="${APP_NAME}.app"
 OUT="build/out"
 ICONSET="build/AppIcon.iconset"
@@ -73,7 +74,8 @@ pkgbuild --root "$STAGE" \
   --scripts pkg/scripts \
   --ownership recommended \
   "$OUT/${APP_NAME}-component.pkg"
-productbuild --distribution pkg/distribution.xml \
+sed "s/@VERSION@/$VERSION/g" pkg/distribution.xml > build/distribution.xml
+productbuild --distribution build/distribution.xml \
   --package-path "$OUT" \
   "$OUT/${APP_NAME}-${VERSION}.pkg"
 rm -f "$OUT/${APP_NAME}-component.pkg"

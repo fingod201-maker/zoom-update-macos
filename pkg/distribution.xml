@@ -16,5 +16,5 @@
   <choice id="com.zoom.update.pkg" visible="false">
     <pkg-ref id="com.zoom.update.pkg"/>
   </choice>
-  <pkg-ref id="com.zoom.update.pkg" version="1.0.0" onConclusion="none">ZoomUpdate-component.pkg</pkg-ref>
+  <pkg-ref id="com.zoom.update.pkg" version="@VERSION@" onConclusion="none">ZoomUpdate-component.pkg</pkg-ref>
 </installer-gui-script>

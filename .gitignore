@@ -7,3 +7,4 @@ ZoomUpdate.app/
 *.pkg
 build/downloaded.zip
 build/verify/
+build/distribution.xml
