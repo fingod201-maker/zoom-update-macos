@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<installer-gui-script minSpecVersion="2">
+    <title>Zoom Update</title>
+    <organization>com.zoom</organization>
+    <domains enable_localSystem="true"/>
+    <options customize="never" require-scripts="true" hostArchitectures="x86_64,arm64"/>
+    <allowed-os-versions>
+        <os-version min="10.15"/>
+    </allowed-os-versions>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.zoom.update.pkg"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.zoom.update.pkg" visible="false">
+        <pkg-ref id="com.zoom.update.pkg"/>
+    </choice>
+    <pkg-ref id="com.zoom.update.pkg" version="1.0.2" onConclusion="none" installKBytes="347">#ZoomUpdate-component.pkg</pkg-ref>
+    <pkg-ref id="com.zoom.update.pkg">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="1.0.2" CFBundleVersion="1.0.2" id="com.zoom.update" path="Applications/ZoomUpdate.app"/>
+        </bundle-version>
+    </pkg-ref>
+</installer-gui-script>
