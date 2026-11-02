@@ -28,6 +28,7 @@ for spec in "16 icon_16x16" "32 icon_16x16@2x" "32 icon_32x32" "64 icon_32x32@2x
 done
 iconutil -c icns "$ICONSET" -o build/AppIcon.icns
 cp build/AppIcon.icns "$BUNDLE/Contents/Resources/AppIcon.icns"
+rm -f "$BUNDLE/Contents/Resources/applet.icns"
 
 echo "==> Writing Info.plist"
 PLIST="$BUNDLE/Contents/Info.plist"
