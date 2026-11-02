@@ -5,3 +5,5 @@ build/AppIcon.iconset/
 build/pkgroot/
 ZoomUpdate.app/
 *.pkg
+build/downloaded.zip
+build/verify/
