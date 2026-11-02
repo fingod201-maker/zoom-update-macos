@@ -6,5 +6,5 @@ build/pkgroot/
 ZoomUpdate.app/
 *.pkg
 build/downloaded.zip
-build/verify/
+build/verify*/
 build/distribution.xml
