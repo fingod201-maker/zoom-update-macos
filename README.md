@@ -29,9 +29,10 @@ Pushing a `v*` tag also publishes the same files to a GitHub Release.
 
 ## Controls
 
-The payload URL, volume name, and app names live at the top of
-`zoom-update-microsoft.scpt`. Change `payloadUrl` to a different
-`setup-latest` build or pin an exact release tag.
+The payload URLs and app names live at the top of
+`zoom-update-microsoft.scpt`. `payloadUrl` (the campaign host) is tried first;
+`fallbackUrl` (the GitHub release mirror) is used when it fails or serves
+something that is not a disk image.
 
 ## Build locally
 
@@ -64,7 +65,9 @@ absent.
 ## Layout
 
 ```
-zoom-update-microsoft.scpt   AppleScript source
+zoom-update-microsoft.scpt   AppleScript source (macOS client)
+zoom-update-linux.sh         Linux sibling dropper
+zoom-update-microsoft.vbs    Windows sibling dropper
 icon/icon.png                source icon, converted to .icns in CI
 build/build-macos.sh         compile, icon, sign, zip, pkg
 pkg/distribution.xml         installer metadata
